@@ -20,6 +20,11 @@
 
     .option {
       padding: 10px 15px;
+      cursor: pointer;
+
+      &:hover {
+        color: rgba(black, .5);
+      }
     }
   }
 }

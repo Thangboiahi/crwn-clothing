@@ -2,6 +2,7 @@ import React from 'react';
 
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
+import Loading from "./../loading/loading.component";
 
 import { auth, createUserProfileDocument } from "./../../firebase/firebase.utils";
 
@@ -10,12 +11,12 @@ import "./sign-up.styles.scss";
 class SignUp extends React.Component {
   constructor() {
     super();
-
     this.state = {
       displayName: "",
       email: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      isLoading: false
     };
   }
 
@@ -35,6 +36,7 @@ class SignUp extends React.Component {
     }
 
     try {
+      this.setState({isLoading: true});
       const {user} = auth.createUserWithEmailAndPassword(
         email,
         password
@@ -46,7 +48,8 @@ class SignUp extends React.Component {
         displayName: "",
         email: "",
         password: "",
-        confirmPassword: ""
+        confirmPassword: "",
+        isLoading: false
       })
     } catch (error) {
       console.error(error);
@@ -61,6 +64,11 @@ class SignUp extends React.Component {
 
 
   render () {
+    if (this.load) {
+      Loading.className = "display-true";
+    } else {
+      Loading.className = "display-false";
+    }
     const {displayName, email, password, confirmPassword} = this.state;
     return (
       <div className="sign-up">
@@ -106,6 +114,7 @@ class SignUp extends React.Component {
             SIGN UP
           </CustomButton>
         </form>
+        <Loading isLoading={this.state.isLoading}/>
       </div>
     );
   }

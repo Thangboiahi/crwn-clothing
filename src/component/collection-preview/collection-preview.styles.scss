@@ -1,5 +1,5 @@
 .collection-preview {
-  display: flex;
+  display: grid;
   flex-direction: column;
   margin-bottom: 30px;
 
@@ -11,5 +11,6 @@
   .preview {
     display: flex;
     justify-content: space-between;
+    flex-wrap: wrap;
   }
 }
